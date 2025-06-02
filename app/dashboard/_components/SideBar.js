@@ -3,15 +3,19 @@ import { Progress } from "@/components/ui/progress";
 import { Layout, Shield } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import UploadPDFDialog from "./UploadPDFDialog";
 
 function SideBar() {
   return (
     <div className="shadow-md h-screen p-4 ">
       <Image src={"/logo.svg"} alt="logo" width={80} height={80} />
       <div className="mt-10">
-        <Button className="w-full" variant="outline">
-          Upload PDF
-        </Button>
+        <UploadPDFDialog>
+          <Button className="w-full" variant="outline">
+            Upload PDF
+          </Button>
+        </UploadPDFDialog>
+
         <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
           <Layout />
           <span>Workspace</span>
