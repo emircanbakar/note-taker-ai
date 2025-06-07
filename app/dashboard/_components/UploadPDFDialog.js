@@ -11,18 +11,22 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useMutation } from "convex/react";
+import { useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Loader2Icon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
+import axios from "axios";
 
 function UploadPDFDialog({ children }) {
   const [files, setFiles] = useState();
   const [loading, setLoading] = useState();
   const { user } = useUser();
   const [fileName, setFileName] = useState();
+  const [open, setOpen] = useState(false);
+
+  const embedDocument = useAction(api.myActions.ingest);
   const generateUploadUrl = useMutation(api.fileStorage.generateUploadUrl);
   const InsertFileEntry = useMutation(api.fileStorage.AddFileToDb);
   const getFileUrl = useMutation(api.fileStorage.getFileUrl);
@@ -57,12 +61,24 @@ function UploadPDFDialog({ children }) {
 
     console.log(res, "res");
 
+    const apiRes = await axios.get("/api/pdf?pdfUrl=" + fileUrl);
+    console.log(apiRes.data.result);
+    await embedDocument({
+      splittedText: apiRes.data.result,
+      fileId: fileId,
+    });
+
     setLoading(false);
+    setOpen(false);
   };
 
   return (
-    <Dialog>
-      <DialogTrigger> {children} </DialogTrigger>
+    <Dialog open={open}>
+      <DialogTrigger>
+        <Button className="w-full" onClick={() => setOpen(true)}>
+          + Upload Pdf File
+        </Button>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Upload PDF File</DialogTitle>
@@ -92,7 +108,7 @@ function UploadPDFDialog({ children }) {
               Close
             </Button>
           </DialogClose>
-          <Button onClick={onLoad}>
+          <Button onClick={onLoad} disabled={loading}>
             {loading ? <Loader2Icon className="animate-spin" /> : "Upload"}
           </Button>
         </DialogFooter>
