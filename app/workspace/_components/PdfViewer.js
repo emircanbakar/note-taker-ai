@@ -1,7 +1,6 @@
 import React from "react";
 
 function PdfViewer({ fileUrl }) {
-  console.log(fileUrl, "nası yoks");
   return (
     <div>
       <iframe
