@@ -30,7 +30,18 @@ function EditorExtensions({ editor }) {
       fileId: fileId,
     });
 
-    console.log(res, "unformetted");
+    const UnformattedAnswer = JSON.parse(res);
+    let allUnformattedAnswer = "";
+    UnformattedAnswer &&
+      UnformattedAnswer.forEach((item) => {
+        allUnformattedAnswer = allUnformattedAnswer + item.pageContent;
+      });
+
+    const PROMPT =
+      "For question: " +
+      selected +
+      "and with the given content as answer please give appropriate in HTML format. The answer content is: " +
+      allUnformattedAnswer;
   };
 
   return (

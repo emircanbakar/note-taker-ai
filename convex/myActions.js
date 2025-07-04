@@ -15,7 +15,7 @@ export const ingest = action({
   handler: async (ctx, args) => {
     await ConvexVectorStore.fromTexts(
       args.splittedText,
-      args.fileId,
+      args.splittedText.map(() => ({ fileId: args.fileId })), // DÜZELTİLDİ
       new GoogleGenerativeAIEmbeddings({
         apiKey: GOOGLE_API_KEY,
         modelName: "embedding-001", // 768 dimensions
@@ -44,8 +44,7 @@ export const search = action({
       { ctx }
     );
 
-    const results = await vectorStore.similaritySearch(args.query, 1);
-    console.log("All results:", results);
+    const results = await vectorStore.similaritySearch(args.query, 3);
     const resultOne = results.filter((q) => q.metadata.fileId === args.fileId);
     console.log("Filtered results:", resultOne);
     return JSON.stringify(resultOne);
