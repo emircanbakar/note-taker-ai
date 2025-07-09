@@ -1,3 +1,4 @@
+import { chatSession } from "@/configs/AIModel";
 import { api } from "@/convex/_generated/api";
 import { useAction } from "convex/react";
 import {
@@ -42,6 +43,14 @@ function EditorExtensions({ editor }) {
       selected +
       "and with the given content as answer please give appropriate in HTML format. The answer content is: " +
       allUnformattedAnswer;
+
+    const AiModelResult = await chatSession.sendMessage(PROMPT);
+    // console.log(AiModelResult.response.text());
+    const finalResult = AiModelResult.response.text();
+    const allText = editor.getHTML();
+    editor.commands.setContent(
+      allText + "<p> <strong> Answer: </strong>" + finalResult + " </p>"
+    );
   };
 
   return (

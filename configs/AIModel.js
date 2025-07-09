@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const apiKey = process.env.GEMINI_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
@@ -12,8 +12,13 @@ const generationConfig = {
   topP: 0.95,
   topK: 40,
   maxOutputTokens: 8192,
-  respnseMimeType: "text/plain",
+  responseMimeType: "text/plain",
 };
 
-const result = await ChatSession.sendMessage("Insert");
-console.log(result.response.text());
+export const chatSession = model.startChat({
+  generationConfig,
+  history: [],
+});
+
+// const result = await chatSession.sendMessage("Insert");
+// console.log(result.response.text());
