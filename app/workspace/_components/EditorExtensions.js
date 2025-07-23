@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useParams } from "next/navigation";
 import React from "react";
+import { toast } from "sonner";
 
 function EditorExtensions({ editor }) {
   if (!editor) return;
@@ -19,6 +20,7 @@ function EditorExtensions({ editor }) {
   const searchAi = useAction(api.myActions.search);
 
   const onAiClick = async () => {
+    toast("Cevap oluşturuluyor...");
     const selected = editor.state.doc.textBetween(
       editor.state.selection.from,
       editor.state.selection.to,
@@ -46,7 +48,11 @@ function EditorExtensions({ editor }) {
 
     const AiModelResult = await chatSession.sendMessage(PROMPT);
     // console.log(AiModelResult.response.text());
-    const finalResult = AiModelResult.response.text();
+    const finalResult = AiModelResult.response
+      .text()
+      .replace("```", "")
+      .replace("html", "")
+      .replace("```", "");
     const allText = editor.getHTML();
     editor.commands.setContent(
       allText + "<p> <strong> Answer: </strong>" + finalResult + " </p>"
