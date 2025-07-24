@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { chatSession } from "@/configs/AIModel";
 import { api } from "@/convex/_generated/api";
-import { useAction } from "convex/react";
+import { useUser } from "@clerk/nextjs";
+import { useAction, useMutation } from "convex/react";
 import {
   AlignCenter,
   AlignLeft,
@@ -18,6 +20,8 @@ function EditorExtensions({ editor }) {
   if (!editor) return;
   const { fileId } = useParams();
   const searchAi = useAction(api.myActions.search);
+  const saveNote = useMutation(api.notes.AddNotes);
+  const { user } = useUser();
 
   const onAiClick = async () => {
     toast("Cevap oluşturuluyor...");
@@ -57,6 +61,19 @@ function EditorExtensions({ editor }) {
     editor.commands.setContent(
       allText + "<p> <strong> Answer: </strong>" + finalResult + " </p>"
     );
+  };
+
+  const saveNotes = () => {
+    if (!user?.primaryEmailAddress?.emailAddress) {
+      console.error("Kullanıcı e-posta adresi yüklenmedi.");
+      return;
+    }
+
+    saveNote({
+      notes: editor.getHTML(),
+      fileId: fileId,
+      createdBy: user.primaryEmailAddress.emailAddress,
+    });
   };
 
   return (
@@ -128,6 +145,9 @@ function EditorExtensions({ editor }) {
             >
               <Sparkles />
             </button>
+            <Button className="ml-6" onClick={saveNotes}>
+              Save Notes
+            </Button>
           </div>
         </div>
       </div>
