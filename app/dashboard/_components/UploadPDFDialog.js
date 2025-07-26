@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Loader2Icon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
+import { toast } from "sonner";
 
 function UploadPDFDialog({ children }) {
   const [files, setFiles] = useState();
@@ -70,6 +71,8 @@ function UploadPDFDialog({ children }) {
 
     setLoading(false);
     setOpen(false);
+
+    toast("file is ready...");
   };
 
   return (
