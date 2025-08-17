@@ -39,7 +39,8 @@ function SideBar() {
       <div className="absolute bottom-24 w-40 flex flex-col gap-2">
         {/* <Progress value={(filesArray?.length / 5) * 100} />
         <span className="text-sm">2 out of 5 PDF uploaded</span> */}
-        <span className="text-sm text-gray-400">Upgrade Plan</span>
+        {/* <span className="text-sm text-gray-400">Upgrade Plan</span> */}
+        <span className="text-sm  text-gray-400">developed by ejb</span>
       </div>
     </div>
   );
