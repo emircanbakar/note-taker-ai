@@ -52,7 +52,7 @@ export default function Home() {
           <Link href={"/dashboard"}>
             <Button>Dashboard</Button>
           </Link>
-          {user ?? <UserButton />}
+          {user ? <UserButton /> : <Button>Log in</Button>}
         </div>
       </nav>
       <div className="flex flex-1 items-center justify-center px-16">
