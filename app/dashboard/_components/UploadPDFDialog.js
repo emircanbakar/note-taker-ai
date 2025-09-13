@@ -36,6 +36,13 @@ function UploadPDFDialog({ children }) {
     setFiles(e.target.files[0]);
   };
 
+  const onClose = () => {
+    setOpen(false);
+    setFiles(null);
+    setFileName("");
+    setLoading(false);
+  };
+
   const onLoad = async () => {
     setLoading(true);
 
@@ -107,7 +114,7 @@ function UploadPDFDialog({ children }) {
         </DialogHeader>
         <DialogFooter className="sm:justify-end">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button type="button" variant="secondary" onClick={onClose}>
               Close
             </Button>
           </DialogClose>
