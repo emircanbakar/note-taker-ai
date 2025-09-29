@@ -1,37 +1,25 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
 import Link from "next/link";
 
-// const carouselItems = [
-//   {
-//     id: 1,
-//     title: "Biz Kimiz?",
-//     description:
-//       "Biz, öğrencilere özel dijital not alma ve paylaşım platformuyuz. Amacımız, bilgiye erişimi kolaylaştırmak ve işbirliğini artırmak.",
-//   },
-//   {
-//     id: 2,
-//     title: "Hoşgeldiniz",
-//     description:
-//       "Platformumuza hoşgeldiniz! Burada notlarınızı güvenle saklayabilir ve arkadaşlarınızla paylaşabilirsiniz.",
-//   },
-//   {
-//     id: 3,
-//     title: "Ne Yapıyoruz?",
-//     description:
-//       "Kullanıcılarımıza hızlı, güvenli ve pratik bir not alma deneyimi sunuyoruz. Herkes için erişilebilir bir öğrenme ortamı sağlıyoruz.",
-//   },
-// ];
-
 export default function Home() {
   const { user } = useUser();
   const createUser = useMutation(api.user.createUser);
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const renderTextWithHover = (text, className = "") => {
+    return text.split(" ").map((word, index) => (
+      <span
+        key={index}
+        className={`hover:text-amber-500 transition-all duration-200 cursor-default inline-block mr-2 ${className}`}
+      >
+        {word}
+      </span>
+    ));
+  };
 
   useEffect(() => {
     user && CheckUser();
@@ -64,24 +52,24 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="flex flex-row items-center justify-between w-[1024px] h-full gap-16">
+      <div className="flex flex-row items-center justify-between mx-16 max-w-[1024px] h-full gap-16">
         <div className="flex flex-col text-black w-2/3">
-          <span className="text-5xl font-semibold py-2">
-            stood'a hoşgeldin!
-          </span>
-          <span className="text-2xl">
-            biz, öğrencilere özel dijital not alma ve paylaşım platformuyuz. biz
-            kullanıcılarımıza hızlı, güvenli ve pratik bir not alma deneyimi
-            sunuyoruz. burada notlarınızı güvenle saklayabilir ve AI destekli
-            ürünlerimizi kullanarak daha fazla not çıkartabilir ve bu süreci
-            hızlıca yönetebilirsiniz!
-          </span>
+          <div className="text-5xl font-semibold py-2">
+            {renderTextWithHover("stood'a hoşgeldin!")}
+          </div>
+          <div className="text-2xl">
+            {renderTextWithHover(
+              "biz, öğrencilere özel dijital not alma ve paylaşım platformuyuz. biz kullanıcılarımıza hızlı, güvenli ve pratik bir not alma deneyimi sunuyoruz. burada notlarınızı güvenle saklayabilir ve AI destekli ürünlerimizi kullanarak daha fazla not çıkartabilir ve bu süreci hızlıca yönetebilirsiniz!"
+            )}
+          </div>
         </div>
-        <div className="flex w-1/3">
-          <button className="p-4 py-6 text-lg bg-amber-600 text-white rounded-full">
+        <div className="relative flex items-center justify-center w-1/3 h-64">
+          <span className="absolute text-amber-200 text-center text-8xl font-bold opacity-30 z-0">
+            notları hallet!
+          </span>
+          <button className="relative z-10 p-4 py-6 text-lg bg-blend-color-burn bg-primary text-white rounded-full hover:bg-amber-500 transition-all duration-300 ">
             üye ol
           </button>
-          <span className="text-gray-300 text-4xl">notları hallet!</span>
         </div>
       </div>
     </div>
