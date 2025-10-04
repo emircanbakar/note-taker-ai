@@ -37,11 +37,15 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen w-full items-center">
       <nav className="flex flex-row justify-between px-6 py-4 bg-white shadow-sm fixed top-0 left-0 w-full z-10">
-        <h2 className="text-2xl font-medium">OGRENCISI</h2>
+        <h2 className="text-3xl font-medium">stood</h2>
         <div className="flex flex-row gap-4">
-          <Link href={"/dashboard"}>
-            <Button>Dashboard</Button>
-          </Link>
+          {user ? (
+            <Link href={"/dashboard"}>
+              <Button>Dashboard</Button>
+            </Link>
+          ) : (
+            ""
+          )}
           {user ? (
             <UserButton />
           ) : (
@@ -59,7 +63,7 @@ export default function Home() {
           </div>
           <div className="text-2xl">
             {renderTextWithHover(
-              "biz, öğrencilere özel dijital not alma ve paylaşım platformuyuz. biz kullanıcılarımıza hızlı, güvenli ve pratik bir not alma deneyimi sunuyoruz. burada notlarınızı güvenle saklayabilir ve AI destekli ürünlerimizi kullanarak daha fazla not çıkartabilir ve bu süreci hızlıca yönetebilirsiniz!"
+              "biz, öğrencilere özel dijital not alma ve paylaşım platformuyuz. biz kullanıcılarımıza hızlı, güvenli ve pratik bir not alma deneyimi sunuyoruz. burada notlarınızı güvenle saklayabilir, AI destekli ürünlerimizi kullanarak daha fazla not çıkartabilir ve bu süreci hızlıca yönetebilirsiniz!"
             )}
           </div>
         </div>
