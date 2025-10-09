@@ -45,9 +45,9 @@ function EditorExtensions({ editor }) {
       });
 
     const PROMPT =
-      "For question: " +
+      "Şu soru için: " +
       selected +
-      "and with the given content as answer please give appropriate in HTML format. The answer content is: " +
+      " ve verilen içerik cevap olarak HTML formatında uygun bir şekilde yanıtla. Cevap içeriği: " +
       allUnformattedAnswer;
 
     const AiModelResult = await chatSession.sendMessage(PROMPT);
