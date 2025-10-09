@@ -1,8 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Layout, Shield } from "lucide-react";
-import Image from "next/image";
+import {
+  FilePenLine,
+  Megaphone,
+  SquareSplitHorizontal,
+  SquaresUnite,
+} from "lucide-react";
 import React from "react";
 import UploadPDFDialog from "./UploadPDFDialog";
 import { useUser } from "@clerk/nextjs";
@@ -19,19 +23,27 @@ function SideBar() {
 
   return (
     <div className="shadow-md h-screen p-4 ">
-      {/* <Image src={"/logo.svg"} alt="logo" width={80} height={80} /> */}
-      <h2 className="text-3xl font-medium">stood</h2>
+      <h2 className="text-3xl font-medium select-none">stood</h2>
       <div className="mt-10 w-full">
         <UploadPDFDialog />
 
-        {/* <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
-          <Layout />
-          <span>Workspace</span>
-        </div> */}
-        {/* <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
-          <Shield />
-          <span>Upgrade Plan</span>
-        </div> */}
+        <div className="flex gap-2 items-center mt-12 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
+          <Megaphone />
+          <span>yakında!</span>
+        </div>
+
+        <div className="flex gap-2 items-center opacity-30 p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
+          <SquaresUnite />
+          <span>merge pdf</span>
+        </div>
+        <div className="flex gap-2 items-center opacity-30  p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
+          <SquareSplitHorizontal />
+          <span>split pdf</span>
+        </div>
+        <div className="flex gap-2 items-center opacity-30 p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
+          <FilePenLine />
+          <span>edit pdf</span>
+        </div>
       </div>
       <div className="absolute bottom-24 w-40 flex flex-col gap-2">
         {/* <Progress value={(filesArray?.length / 5) * 100} />
