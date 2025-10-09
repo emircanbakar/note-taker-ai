@@ -19,22 +19,19 @@ function SideBar() {
 
   return (
     <div className="shadow-md h-screen p-4 ">
-      <Image src={"/logo.svg"} alt="logo" width={80} height={80} />
-      <div className="mt-10">
-        <UploadPDFDialog>
-          <Button className="w-full" variant="outline">
-            Upload PDF
-          </Button>
-        </UploadPDFDialog>
+      {/* <Image src={"/logo.svg"} alt="logo" width={80} height={80} /> */}
+      <h2 className="text-3xl font-medium">stood</h2>
+      <div className="mt-10 w-full">
+        <UploadPDFDialog />
 
-        <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
+        {/* <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
           <Layout />
           <span>Workspace</span>
-        </div>
-        <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
+        </div> */}
+        {/* <div className="flex gap-2 items-center my-4 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
           <Shield />
           <span>Upgrade Plan</span>
-        </div>
+        </div> */}
       </div>
       <div className="absolute bottom-24 w-40 flex flex-col gap-2">
         {/* <Progress value={(filesArray?.length / 5) * 100} />

@@ -4,7 +4,6 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
-
 import EditorExtensions from "./EditorExtensions";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -22,7 +21,9 @@ function TextEditor({ fileId }) {
         },
         paragraph: true,
       }),
-      Placeholder.configure({ placeholder: "take your notes here!" }),
+      Placeholder.configure({
+        placeholder: "sorularınızı yazın, cevaplansın!",
+      }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),

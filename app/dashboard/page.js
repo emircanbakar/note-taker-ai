@@ -13,34 +13,39 @@ function Dashboard() {
     userEmail: user?.primaryEmailAddress.emailAddress,
   });
 
-  console.log(fileList, "files");
+  // console.log(fileList, "files");
   return (
     <div>
-      <h2 className="font-medium text-2xl">Workspace</h2>
+      <h2 className="font-medium text-2xl">Çalışmaların</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
-        {fileList?.length > 0
-          ? fileList?.map((file, index) => (
-              <Link href={"/workspace/" + file.fileId}>
-                <div
-                  className="flex p-4 shadow-sm rounded-md flex-col justify-center items-center border hover:shadow-xl transition-all  cursor-pointerw"
-                  key={index}
-                >
-                  <Image
-                    src={"/pdf-file.png"}
-                    width={50}
-                    height={50}
-                    alt="pdf"
-                  />
-                  <h3 className="mt-2 text-lg"> {file?.fileName} </h3>
-                </div>
-              </Link>
-            ))
-          : [1, 2, 3, 4, 5].map((item, index) => (
-              <div
-                key={index}
-                className="bg-slate-100 rounded-md h-[150px] animate-pulse"
-              ></div>
-            ))}
+        {fileList === undefined ? (
+          [1, 2, 3, 4, 5].map((item, index) => (
+            <div
+              key={index}
+              className="bg-slate-100 rounded-md h-[150px] animate-pulse"
+            ></div>
+          ))
+        ) : fileList?.length > 0 ? (
+          fileList?.map((file, index) => (
+            <Link href={"/workspace/" + file.fileId} key={index}>
+              <div className="flex p-4 shadow-sm rounded-md flex-col justify-center items-center border hover:shadow-xl transition-all cursor-pointer">
+                <Image src={"/pdf-file.png"} width={50} height={50} alt="pdf" />
+                <h3 className="mt-2 text-lg"> {file?.fileName} </h3>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="col-span-full flex flex-col items-center justify-center py-12 text-center">
+            <Image
+              src={"/pdf-file.png"}
+              width={80}
+              height={80}
+              alt="pdf"
+              className="opacity-30 mb-4"
+            />
+            <p className="text-gray-400">Henüz hiç PDF dosyası yüklemediniz.</p>
+          </div>
+        )}
       </div>
     </div>
   );

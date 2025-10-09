@@ -146,7 +146,7 @@ function EditorExtensions({ editor }) {
               <Sparkles />
             </button>
             <Button className="ml-6" onClick={saveNotes}>
-              Save Notes
+              kaydet
             </Button>
           </div>
         </div>

@@ -1,14 +1,16 @@
 "use client";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { user } = useUser();
   const createUser = useMutation(api.user.createUser);
+  const router = useRouter();
 
   const renderTextWithHover = (text, className = "") => {
     return text.split(" ").map((word, index) => (
@@ -22,8 +24,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    user && CheckUser();
-  }, [user]);
+    if (user) {
+      CheckUser();
+      router.push("/dashboard");
+    }
+  }, [user, router]);
 
   const CheckUser = async () => {
     const res = await createUser({
@@ -71,9 +76,11 @@ export default function Home() {
           <span className="absolute text-amber-200 text-center text-8xl font-bold opacity-30 z-0">
             notları hallet!
           </span>
-          <button className="relative z-10 p-4 py-6 text-lg bg-blend-color-burn bg-primary text-white rounded-full hover:bg-amber-500 transition-all duration-300 ">
-            üye ol
-          </button>
+          <Link href={"/sign-up"}>
+            <button className="relative z-10 p-4 py-6 text-lg bg-blend-color-burn bg-primary text-white rounded-full hover:bg-amber-500 transition-all duration-300 ">
+              üye ol
+            </button>
+          </Link>
         </div>
       </div>
     </div>

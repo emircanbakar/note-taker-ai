@@ -79,33 +79,35 @@ function UploadPDFDialog({ children }) {
     setLoading(false);
     setOpen(false);
 
-    toast("file is ready...");
+    toast("dosya hazır...");
   };
 
   return (
     <Dialog open={open}>
-      <DialogTrigger>
+      <DialogTrigger className="w-full">
         <Button className="w-full" onClick={() => setOpen(true)}>
-          + Upload Pdf File
+          PDF ekle
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Upload PDF File</DialogTitle>
+          <DialogTitle>Dosya yükle</DialogTitle>
           <DialogDescription asChild>
             <div>
-              <div className="flex gap-4 p-3 divide-x my-2 ">
-                <h2>Select file to upload</h2>
+              <div className="flex gap-4 p-3 divide-x items-center my-2">
+                <h2 className="w-[20%] flex items-center justify-center text-center">
+                  Dosya Seç
+                </h2>
                 <input
                   type="file"
-                  className="border p-2 rounded-sm"
+                  className="border p-2 rounded-sm w-[80%] "
                   accept="application/pdf"
                   onChange={(e) => onFileSelect(e)}
                 />
               </div>
               <div>
                 <Input
-                  placeholder="file name"
+                  placeholder="Dosya adı"
                   onChange={(e) => setFileName(e.target.value)}
                 />
               </div>
@@ -115,11 +117,11 @@ function UploadPDFDialog({ children }) {
         <DialogFooter className="sm:justify-end">
           <DialogClose asChild>
             <Button type="button" variant="secondary" onClick={onClose}>
-              Close
+              iptal
             </Button>
           </DialogClose>
           <Button onClick={onLoad} disabled={loading}>
-            {loading ? <Loader2Icon className="animate-spin" /> : "Upload"}
+            {loading ? <Loader2Icon className="animate-spin" /> : "yükle"}
           </Button>
         </DialogFooter>
       </DialogContent>
