@@ -30,4 +30,15 @@ export default defineSchema({
     notes: v.any(),
     createdBy: v.string(),
   }),
+
+  mergedPdfs: defineTable({
+    mergedFileId: v.string(),
+    originalFiles: v.array(v.string()), // Array of original file IDs/names
+    mergedFileName: v.string(),
+    mergedFileUrl: v.string(),
+    storageId: v.string(),
+    createdBy: v.string(),
+    createdAt: v.number(),
+    fileSize: v.number(),
+  }),
 });

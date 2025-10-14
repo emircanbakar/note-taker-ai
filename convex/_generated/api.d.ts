@@ -16,6 +16,7 @@ import type {
 import type * as env from "../env.js";
 import type * as fileStorage from "../fileStorage.js";
 import type * as langchain_db from "../langchain/db.js";
+import type * as mergedPdfs from "../mergedPdfs.js";
 import type * as myActions from "../myActions.js";
 import type * as notes from "../notes.js";
 import type * as user from "../user.js";
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   env: typeof env;
   fileStorage: typeof fileStorage;
   "langchain/db": typeof langchain_db;
+  mergedPdfs: typeof mergedPdfs;
   myActions: typeof myActions;
   notes: typeof notes;
   user: typeof user;

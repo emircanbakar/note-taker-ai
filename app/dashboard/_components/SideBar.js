@@ -12,8 +12,11 @@ import UploadPDFDialog from "./UploadPDFDialog";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function SideBar() {
+  const pathname = usePathname();
   // const { user } = useUser();
   // const fileList = useQuery(api.fileStorage.GetUserFiles, {
   //   userEmail: user?.primaryEmailAddress.emailAddress,
@@ -27,15 +30,27 @@ function SideBar() {
       <div className="mt-10 w-full">
         <UploadPDFDialog />
 
-        <div className="flex gap-2 items-center mt-12 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all">
-          <Megaphone />
-          <span>yakında!</span>
-        </div>
+        <Link href="/dashboard">
+          <div
+            className={`flex gap-2 items-center mt-12 p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all ${
+              pathname === "/dashboard" ? "bg-accent" : ""
+            }`}
+          >
+            <Megaphone />
+            <span>Dashboard</span>
+          </div>
+        </Link>
 
-        <div className="flex gap-2 items-center opacity-30 p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
-          <SquaresUnite />
-          <span>merge pdf</span>
-        </div>
+        <Link href="/merger">
+          <div
+            className={`flex gap-2 items-center p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all ${
+              pathname === "/merger" ? "bg-accent" : ""
+            }`}
+          >
+            <SquaresUnite />
+            <span>merge pdf</span>
+          </div>
+        </Link>
         <div className="flex gap-2 items-center opacity-30  p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
           <SquareSplitHorizontal />
           <span>split pdf</span>
