@@ -1,6 +1,15 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
+import { Loader2, CheckCircle, Circle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 
 function MergeProgress({ progress = 0, currentStep = 0 }) {
   const steps = [
@@ -13,52 +22,47 @@ function MergeProgress({ progress = 0, currentStep = 0 }) {
 
   return (
     <div className="max-w-md mx-auto mt-12">
-      <div className="text-center mb-8">
-        <div className="flex justify-center items-center mb-4">
-          <Loader2 className="h-12 w-12 text-blue-600 animate-spin" />
-        </div>
-        <h3 className="text-xl font-semibold mb-2">PDF'ler Birleştiriliyor</h3>
-        <p className="text-gray-600">Lütfen bekleyin...</p>
-      </div>
-
-      <div className="bg-white rounded-lg border p-6">
-        <div className="mb-6">
-          <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>İlerleme</span>
-            <span>{Math.round(progress)}%</span>
+      <Card>
+        <CardHeader className="text-center">
+          <div className="flex justify-center items-center mb-4">
+            <Loader2 className="h-12 w-12 text-primary animate-spin" />
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
+          <CardTitle>PDF'ler Birleştiriliyor</CardTitle>
+          <CardDescription>Lütfen bekleyin...</CardDescription>
+        </CardHeader>
 
-        <div className="space-y-3">
-          {steps.map((step, index) => (
-            <div
-              key={index}
-              className={`flex items-center space-x-3 text-sm
-                ${index <= currentStep ? "text-blue-600" : "text-gray-400"}
-              `}
-            >
-              <div
-                className={`w-3 h-3 rounded-full
-                  ${
-                    index < currentStep
-                      ? "bg-green-500"
-                      : index === currentStep
-                        ? "bg-blue-500 animate-pulse"
-                        : "bg-gray-300"
-                  }
-                `}
-              />
-              <span>{step}</span>
+        <CardContent className="space-y-6">
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>İlerleme</span>
+              <Badge variant="outline">{Math.round(progress)}%</Badge>
             </div>
-          ))}
-        </div>
-      </div>
+            <Progress value={progress} className="h-2" />
+          </div>
+
+          <div className="space-y-3">
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className={`flex items-center space-x-3 text-sm transition-colors
+                  ${index <= currentStep ? "text-primary" : "text-muted-foreground"}
+                `}
+              >
+                <div className="flex-shrink-0">
+                  {index < currentStep ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : index === currentStep ? (
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                  ) : (
+                    <Circle className="h-4 w-4" />
+                  )}
+                </div>
+                <span>{step}</span>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -7,6 +7,17 @@ import React, { useState } from "react";
 import PdfDropZone from "./_components/PdfDropZone";
 import MergeProgress from "./_components/MergeProgress";
 import SelectedPdfList from "./_components/SelectedPdfList";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Download, RefreshCw } from "lucide-react";
 
 function MergerPage() {
   const { user } = useUser();
@@ -134,10 +145,10 @@ function MergerPage() {
   };
 
   return (
-    <div>
+    <div className="container mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">PDF Birleştir</h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Birden fazla PDF dosyasını tek bir dosyada birleştirin
         </p>
       </div>
@@ -148,65 +159,83 @@ function MergerPage() {
           currentStep={progressUpdate.step}
         />
       ) : mergedFileData ? (
-        <div className="text-center py-12">
-          <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-4">
-            <h3 className="text-lg font-semibold text-green-800 mb-2">
-              PDF başarıyla birleştirildi!
-            </h3>
-            <p className="text-green-600 mb-4">
-              Dosyalarınız başarıyla tek bir PDF dosyasında birleştirildi.
-            </p>
-            <button
-              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
-              onClick={handleDownload}
-            >
-              İndir ({(mergedFileData.fileSize / 1024 / 1024).toFixed(2)} MB)
-            </button>
-          </div>
-          <button
-            onClick={() => {
-              setSelectedFiles([]);
-              setMergedFileData(null);
-              setProgressUpdate({ progress: 0, step: 0 });
-            }}
-            className="text-blue-600 hover:text-blue-800"
-          >
-            Yeni birleştirme işlemi başlat
-          </button>
+        <div className="max-w-md mx-auto">
+          <Card className="text-center">
+            <CardHeader>
+              <CardTitle className="text-green-700">
+                PDF başarıyla birleştirildi!
+              </CardTitle>
+              <CardDescription>
+                Dosyalarınız başarıyla tek bir PDF dosyasında birleştirildi.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button onClick={handleDownload} size="lg" className="w-full">
+                <Download className="mr-2 h-4 w-4" />
+                İndir
+                <Badge variant="secondary" className="ml-2">
+                  {(mergedFileData.fileSize / 1024 / 1024).toFixed(2)} MB
+                </Badge>
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSelectedFiles([]);
+                  setMergedFileData(null);
+                  setProgressUpdate({ progress: 0, step: 0 });
+                }}
+                className="w-full"
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Yeni birleştirme işlemi başlat
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-xl font-semibold mb-4">
-              PDF Dosyalarını Seçin
-            </h2>
-            <PdfDropZone
-              onFileSelect={handleFileSelect}
-              availableFiles={fileList}
-            />
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>PDF Dosyalarını Seçin</CardTitle>
+              <CardDescription>
+                Yeni dosya yükleyin veya mevcut dosyalarınızdan seçin
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <PdfDropZone
+                onFileSelect={handleFileSelect}
+                availableFiles={fileList}
+              />
+            </CardContent>
+          </Card>
 
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">
-                Seçilen Dosyalar ({selectedFiles.length})
-              </h2>
-              {selectedFiles.length >= 2 && (
-                <button
-                  onClick={handleMerge}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Birleştir
-                </button>
-              )}
-            </div>
-
-            <SelectedPdfList
-              files={selectedFiles}
-              onRemove={removeFile}
-              onMove={moveFile}
-            />
-          </div>
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>
+                    Seçilen Dosyalar
+                    <Badge variant="secondary" className="ml-2">
+                      {selectedFiles.length}
+                    </Badge>
+                  </CardTitle>
+                  <CardDescription>
+                    Dosyaları sıralayın ve birleştirin
+                  </CardDescription>
+                </div>
+                {selectedFiles.length >= 2 && (
+                  <Button onClick={handleMerge}>Birleştir</Button>
+                )}
+              </div>
+            </CardHeader>
+            <CardContent>
+              <SelectedPdfList
+                files={selectedFiles}
+                onRemove={removeFile}
+                onMove={moveFile}
+              />
+            </CardContent>
+          </Card>
         </div>
       )}
     </div>
