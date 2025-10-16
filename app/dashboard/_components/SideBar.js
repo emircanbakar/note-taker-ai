@@ -37,7 +37,7 @@ function SideBar() {
             }`}
           >
             <Megaphone />
-            <span>Dashboard</span>
+            <span>Anasayfa</span>
           </div>
         </Link>
 
@@ -48,16 +48,23 @@ function SideBar() {
             }`}
           >
             <SquaresUnite />
-            <span>merge pdf</span>
+            <span>PDF birleştir</span>
           </div>
         </Link>
-        <div className="flex gap-2 items-center opacity-30  p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
-          <SquareSplitHorizontal />
-          <span>split pdf</span>
-        </div>
+
+        <Link href="/splitter">
+          <div
+            className={`flex gap-2 items-center p-2 rounded-sm flex-row hover:bg-accent cursor-pointer transition-all ${
+              pathname === "/splitter" ? "bg-accent" : ""
+            }`}
+          >
+            <SquareSplitHorizontal />
+            <span>PDF böl</span>
+          </div>
+        </Link>
         <div className="flex gap-2 items-center opacity-30 p-2 rounded-sm flex-row hover:bg-accent select-none transition-all">
           <FilePenLine />
-          <span>edit pdf</span>
+          <span>PDF düzenle</span>
         </div>
       </div>
       <div className="absolute bottom-24 w-40 flex flex-col gap-2">
