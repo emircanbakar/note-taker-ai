@@ -96,12 +96,9 @@ function PdfDropZone({ onFileSelect, availableFiles }) {
             <CardTitle className="text-lg">
               Yüklü PDF Dosyalarından Seç
             </CardTitle>
-            <CardDescription>
-              Daha önce yüklediğiniz PDF dosyalarını seçebilirsiniz
-            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="max-h-64 overflow-y-auto space-y-2">
+            <div className="max-h-40 overflow-y-auto space-y-2">
               {availableFiles.map((file, index) => (
                 <div
                   key={index}

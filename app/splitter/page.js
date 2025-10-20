@@ -101,7 +101,7 @@ function SplitterPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">PDF Böl</h1>
+        {/* <h1 className="text-3xl font-bold mb-2">PDF Böl</h1> */}
         <p className="text-muted-foreground">
           PDF dosyanızı eşit sayfalara bölün ve ayrı dosyalar olarak indirin
         </p>

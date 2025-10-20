@@ -40,7 +40,7 @@ function SelectedPdfList({ files, onRemove, onMove }) {
           {files.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-4 border-b last:border-b-0 hover:bg-accent/50 transition-colors"
+              className="flex items-center justify-between border-b last:border-b-0 hover:bg-accent/50 transition-colors"
             >
               <div className="flex items-center space-x-3 flex-1">
                 <div className="flex flex-col space-y-1">

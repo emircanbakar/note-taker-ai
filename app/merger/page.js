@@ -147,7 +147,7 @@ function MergerPage() {
   return (
     <div className="container mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">PDF Birleştir</h1>
+        {/* <h1 className="text-3xl font-bold mb-2">PDF Birleştir</h1> */}
         <p className="text-muted-foreground">
           Birden fazla PDF dosyasını tek bir dosyada birleştirin
         </p>

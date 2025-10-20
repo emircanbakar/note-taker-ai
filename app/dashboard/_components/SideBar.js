@@ -14,10 +14,11 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 function SideBar() {
   const pathname = usePathname();
-  // const { user } = useUser();
+  const { user } = useUser();
   // const fileList = useQuery(api.fileStorage.GetUserFiles, {
   //   userEmail: user?.primaryEmailAddress.emailAddress,
   // });
@@ -71,6 +72,7 @@ function SideBar() {
         {/* <Progress value={(filesArray?.length / 5) * 100} />
         <span className="text-sm">2 out of 5 PDF uploaded</span> */}
         {/* <span className="text-sm text-gray-400">Upgrade Plan</span> */}
+        {user ? <UserButton /> : "  "}
         <span className="text-sm  text-gray-400">developed by ejb</span>
       </div>
     </div>
